@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+//React App Dependencies 
+import React, { Component } from 'react';//React Lib
+import { BrowserRouter as Router, Route } from 'react-router-dom';//React's Router
+import { connect } from "react-redux";//Redux Store Connection
+//Web Layout
 import { Container } from "react-bootstrap";
-import { connect } from "react-redux";
-
+//Web-App Pages
 import Home from './pages/Home/Home';
 import Admin from './pages/Admin/Admin';
 

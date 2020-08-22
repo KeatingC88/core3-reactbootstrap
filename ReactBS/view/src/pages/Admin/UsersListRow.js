@@ -1,5 +1,4 @@
 ﻿import { React, Component } from "react";
-import { connect } from "react-redux";
 import { toggleUserAdminStatus, editUserEmail, toggleUserAccountStatus } from "../../redux/actions";
 import { ListGroup } from "react-bootstrap";
 
@@ -8,18 +7,13 @@ class UsersListRow extends Component {
         super(props);
         
     }
-
-
-    render() {
+    render( ) {
         return (
-            <ListGroup.Item>
-                
-            </ListGroup.Item>    
-        )
+            <div>
+                {this.props.user.email}
+            </div>
+        )        
     }
 }
 
-export default connect(
-    null,
-    { toggleUserAdminStatus, editUserEmail, toggleUserAccountStatus }
-)(UsersListRow);
+export default UsersListRow;

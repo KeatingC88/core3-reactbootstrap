@@ -31,7 +31,6 @@ export default function (state = initialState, action) {
                 ids.push(action.payload[i].id);
                 data.push(action.payload[i]);
             }
-            console.log(data);
             return {
                 ...state,
                 ids: ids,
