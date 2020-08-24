@@ -1,18 +1,21 @@
 ﻿//React-Bootstrap
 import React, { Component } from 'react';
-import { Row, Col, Card, Table, Tab, Tabs, Accordion, Alert } from 'react-bootstrap';
+import { Row, Col, Card, Tab, Tabs, Alert } from 'react-bootstrap';
 //Redux Store Connector
 import { connect } from "react-redux";
 //Page Components
 import AddUser from './AddUser';
-import UsersTableBody from './UsersTableBody';
-import UsersListBody from './UsersListBody';
+import UsersTable from './UsersTable';
+import UsersListGroup from './UsersListGroup';
+import UsersAccordion from './UsersAccordion';
 //Redux Store Components
 import { getUsersByVisibilityFilter } from "../../redux/selectors";
 import { startUsersAPI } from "../../redux/actions";
 //Web-App Icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { faTable } from "@fortawesome/free-solid-svg-icons";
+import { faCompressAlt } from "@fortawesome/free-solid-svg-icons";
+import { faList } from "@fortawesome/free-solid-svg-icons";
 
 class Admin extends Component {    
     
@@ -26,8 +29,11 @@ class Admin extends Component {
     
     render() {
         this.props.startUsersAPI();//This fetches the USER API consistently and only applied on the Admin Page Currently.
+        //Icon Elements
+        const tableIcon = <FontAwesomeIcon icon={faTable} />;
+        const accordionIcon = <FontAwesomeIcon icon={faCompressAlt} />;
+        const listIcon = <FontAwesomeIcon icon={faList} />;
         //...
-        //const elementz = <FontAwesomeIcon icon={faCoffee} />;
         return (
             <Row className="mt-5">
                 <Col>
@@ -45,23 +51,16 @@ class Admin extends Component {
                                             </Alert>
                                         </Tab>
                                         <Tab eventKey="table" title="Table">
-                                            <Table striped bordered hover size="sm" className="mt-5">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID#</th>
-                                                        <th>Active</th>
-                                                        <th>Admin</th>
-                                                        <th>Email</th>
-                                                    </tr>
-                                                </thead>
-                                                <UsersTableBody users={this.props.users}  />
-                                            </Table>
+                                            <h1 className="text-center">{tableIcon} Table</h1>                                            
+                                            <UsersTable users={this.props.users} />
                                         </Tab>                                        
                                         <Tab eventKey="accordion" title="Accordion">
-
+                                            <h1 className="text-center">{accordionIcon} Accordion</h1>                                            
+                                            <UsersAccordion users={this.props.users} />                                            
                                         </Tab>
-                                        <Tab eventKey="list" title="List">                                            
-                                            <UsersListBody users={this.props.users} />                                            
+                                        <Tab eventKey="list" title="List">                   
+                                            <h1 className="text-center">{listIcon} List</h1>
+                                            <UsersListGroup users={this.props.users} />                                            
                                         </Tab>
                                     </Tabs>
                                 </Col>

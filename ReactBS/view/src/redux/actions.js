@@ -27,12 +27,10 @@ export const addUserToState = (data) => ({
 });
 
 export const editUserEmail = (id, user, newEmail) => {
-    return function (dispatch) {
-        user.email = newEmail;
-        return axios.put('https://localhost:44338/api/users/' + id, user).then(
-            dispatch(editUserEmailToState())
-        )
-    }
+    user.email = newEmail;        
+    return axios.put('https://localhost:44338/api/users/' + id, user).then(
+        editUserEmailToState()
+    )
 }
 
 export const editUserEmailToState = () => ({

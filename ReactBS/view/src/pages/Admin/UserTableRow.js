@@ -7,6 +7,7 @@ import { Button, ButtonGroup, FormControl, InputGroup, Popover, OverlayTrigger }
 let input = "";
 
 const handleSubmit = (id, user) => {
+    console.log(id, user, input);
     editUserEmail(id, user, input)
 }
 
