@@ -33,6 +33,7 @@ class AddUser extends Component {
     }
 
     validation = (input) => {
+
         console.log("validating...");
         //Split into Character Segments
         let inputArray = input.split("");
@@ -54,7 +55,9 @@ class AddUser extends Component {
         let testLocalForAtLeast1Letter = letterCharsRegExp.test(localEmail);        
         //Numeric Return Counts
         let countLocalLetters = (localEmail.match(/[A-Za-z]/g) || []).length;
+        let countDomainLetters = (domainEmail.match(/[A-Za-z]/g) || []).length;
         let countDotsInLocalEmail = (localEmail.match(/[.]/g) || []).length;
+        let countDotsInDomainEmail = (domainEmail.match(/[.]/g) || []).length;
 
         //First Char is a letter or number...
         if (testFirstCharForSpecialChar === true) {
@@ -64,11 +67,6 @@ class AddUser extends Component {
         //String has @ symbol...
         if (testStringForAtSymbol != true) {
             console.log("String does not contain @");
-            this.state.validated = false;
-        }
-        //String contains at least 1 dot in the Email Domain
-        if (testDomainForDotSymbol != true) {
-            console.log("Domain does not contain a '.' symbol.");
             this.state.validated = false;
         }
         //String limits 2 dots at most in Email Local
@@ -86,9 +84,21 @@ class AddUser extends Component {
             console.log("Local Must contain a minimum of 3 letters.");
             this.state.validated = false;
         }
-        //Domain has only 1 dot in the domain.
-        //Domain has at least 1 letter.
+        //String contains at least 1 dot in the Email Domain
+        if (testDomainForDotSymbol != true) {
+            console.log("Domain does not contain a '.' symbol.");
+            this.state.validated = false;
+        }
+        //Domain has only 3 dots in the domain.
+        if (countDotsInDomainEmail >= 3) {
+            console.log("Domain must contain maximum of 3 .'s");
+            this.state.validated = false;
+        }
         //Domain has at least 3 letters.
+        if (countDomainLetters >= 3) {
+            console.log("Domain must contain minimum of 3 letters");
+            this.state.validated = false;
+        }        
     }
 
     render() {
