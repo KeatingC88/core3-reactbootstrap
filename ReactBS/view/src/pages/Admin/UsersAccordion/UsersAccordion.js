@@ -1,12 +1,8 @@
 ﻿import React, { Component } from "react";
 import { Accordion } from 'react-bootstrap';
-import { UserAccordionRow } from "./UserAccordionRow";
+import { UserAccordionRow } from "./UserAccordionRow/UserAccordionRow";
 
 class UsersAccordion extends Component {
-
-    constructor(props) {
-        super(props);        
-    }
 
     render() {
         //...

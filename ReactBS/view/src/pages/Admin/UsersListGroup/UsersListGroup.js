@@ -1,12 +1,8 @@
 ﻿import React, { Component } from "react";
 import { ListGroup } from "react-bootstrap";
-import UserListRow from './UserListRow';
+import UserListRow from './UserListRow/UserListRow';
 
 class UsersListGroup extends Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         const users = this.props.users;

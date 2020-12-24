@@ -1,5 +1,9 @@
-﻿import {
-    ADD_USER, FETCH_USERAPI
+﻿
+import {
+
+    ADD_USER,
+    FETCH_USERAPI
+
 } from "../actionTypes";
 
 const initialState = {

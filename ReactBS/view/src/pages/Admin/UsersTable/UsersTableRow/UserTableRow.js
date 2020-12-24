@@ -1,14 +1,16 @@
 ﻿import React from "react";
 import { connect } from "react-redux";
 import cx from "classnames";
-import { toggleUserAdminStatus, editUserEmail, toggleUserAccountStatus } from "../../redux/actions";
+import { toggleUserAdminStatus, editUserEmail, toggleUserAccountStatus } from "../../../../redux/actions";
 import { Button, ButtonGroup, FormControl, InputGroup, Popover, OverlayTrigger } from "react-bootstrap";
 
 let input = "";
 
 const handleSubmit = (id, user) => {
-    console.log(id, user, input);
+    //console.log(id, user, input);
     editUserEmail(id, user, input)
+    //Close PopUp...
+
 }
 
 const updateInput = (_input) => {
@@ -34,6 +36,7 @@ const UserElement = ({ user, toggleUserAdminStatus, toggleUserAccountStatus }) =
         >
             {user.email}
             <ButtonGroup toggle size="sm" className="float-right">
+
                 <OverlayTrigger rootClose={true} trigger="click" placement="left" overlay=
                     {
                     <Popover>
@@ -48,10 +51,15 @@ const UserElement = ({ user, toggleUserAdminStatus, toggleUserAccountStatus }) =
                         </Popover.Content>
                     </Popover>
                 }>
-                    <Button variant="outline-secondary">Edit</Button>
+                <Button variant="outline-secondary">Edit</Button>
                 </OverlayTrigger>
-                <Button variant="outline-secondary" onClick={() => toggleUserAdminStatus(user.id, user)}>Admin</Button>                
-                <Button variant="outline-secondary" onClick={() => toggleUserAccountStatus(user)}>{user && user.active ? "Disable" : "Enable"}</Button>
+
+                <Button variant="outline-secondary" onClick={() => toggleUserAdminStatus(user.id, user)}>
+                    {user && user.admin ? "Admin" : "User"}
+                </Button>                
+                <Button variant="outline-secondary" onClick={() => toggleUserAccountStatus(user)}>
+                    {user && user.active ? "Disable" : "Enable"}
+                </Button>
             </ButtonGroup>
         </td>
     </tr>

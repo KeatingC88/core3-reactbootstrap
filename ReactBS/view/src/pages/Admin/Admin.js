@@ -4,10 +4,10 @@ import { Row, Col, Card, Tab, Tabs, Alert } from 'react-bootstrap';
 //Redux Store Connector
 import { connect } from "react-redux";
 //Page Components
-import AddUser from './AddUser';
-import UsersTable from './UsersTable';
-import UsersListGroup from './UsersListGroup';
-import UsersAccordion from './UsersAccordion';
+import AddUser from './AddUser/AddUser';
+import UsersTable from './UsersTable/UsersTable';
+import UsersListGroup from './UsersListGroup/UsersListGroup';
+import UsersAccordion from './UsersAccordion/UsersAccordion';
 //Redux Store Components
 import { getUsersByVisibilityFilter } from "../../redux/selectors";
 import { startUsersAPI } from "../../redux/actions";
@@ -24,7 +24,6 @@ class Admin extends Component {
         this.state = {
             key: "home",//Default Tab that acts as a Cover-Page.
         }
-
     }
     
     render() {

@@ -1,7 +1,6 @@
 ﻿import React from "react";
 import { connect } from "react-redux";
-import cx from "classnames";
-import { toggleUserAdminStatus, editUserEmail, toggleUserAccountStatus } from "../../redux/actions";
+import { toggleUserAdminStatus, editUserEmail, toggleUserAccountStatus } from "../../../../redux/actions";
 import { Button, ButtonGroup, FormControl, InputGroup, Popover, OverlayTrigger, ListGroup } from "react-bootstrap";
 
 let input = "";

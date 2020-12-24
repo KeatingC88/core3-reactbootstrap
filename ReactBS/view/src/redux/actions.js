@@ -1,11 +1,15 @@
 ﻿import {
-    ADD_USER, EDIT_USER, SET_FILTER, FETCH_USERAPI, TOGGLE_USER_ACCOUNT_STATUS
+    ADD_USER,
+    EDIT_USER,
+    SET_FILTER,
+    FETCH_USERAPI,
+    TOGGLE_USER_ACCOUNT_STATUS
 } from "./actionTypes";
 
 import axios from "axios";
 
 let idCount = 0;
-//Add a User by Email to the User List on the Admin Page.
+/*Add a User by Email to the User List on the Admin Page.*/
 export const addUser = (email) => {    
     return function (dispatch) {
         const userObject = {
@@ -13,21 +17,23 @@ export const addUser = (email) => {
             email: email,
             admin: false,
             active: true
-        }//post-write to this api
-        return axios.post('https://localhost:44338/api/users/', userObject).then(({ data }) => {
+        }//userObject.
+        return axios.post('https://localhost:44338/api/users/', userObject).then(({ data }) =>
+        {
+            //Dispatch to the ReduxStore.
             dispatch(addUserToState(data))
-            }
-        )
+            //...
+        })//then(Data)
     }
-}
-//Add User to the Redux Store after adding a user by param to the User List on the Admin Page.
+}//addUser Method.
+/*Add User to the Redux Store after adding a user by param to the User List on the Admin Page.*/
 export const addUserToState = (data) => ({
     type: ADD_USER,
     payload: data
-});
+});//addUserToState
 
 export const editUserEmail = (id, user, newEmail) => {
-    user.email = newEmail;        
+    user.email = newEmail;
     return axios.put('https://localhost:44338/api/users/' + id, user).then(
         editUserEmailToState()
     )
@@ -55,35 +61,29 @@ export const setUsersAPIDataToState = (data) => ({
 
 //Toggle Admin Status on the User List on the Admin Page.
 export const toggleUserAdminStatus = (id, user) => {
-    return function (dispatch) {
-        if (user.admin === false) {
-            user.admin = true;
-        } else {
-            user.admin = false;
-        }
-        return axios.put('https://localhost:44338/api/users/' + id, user).then((data) => {
-            dispatch(toggleUserAdminStatusToState())
-        })
-    }
-}
+    return function (dispatch) {//Dispatching to Redux Store.
+        user.admin = !user.admin;//Toggle Boolean for User Admin Status.
+        return axios.put('https://localhost:44338/api/users/' + id, user).then(() => {//Put Request Then
+            dispatch(toggleUserAdminStatusToState())//Dispatch to Redux Store using this Method Criteria.
+        })//HTTP PUT Request Then use the specified method.
+    }//Dispatched to Redux Store.
+}//toggleUserAdminStatus
 
+/*Dispatch*/
 export const toggleUserAdminStatusToState = () => ({
     type: TOGGLE_USER_ACCOUNT_STATUS
 });
 
-//Toggle Active/Inactive Accounts on the {User List} for the {Admin Page}.
-export const toggleUserAccountStatus = (user) => {
-    return function (dispatch) {
-        if (user.active === false) {
-            user.active = true;
-        } else {
-            user.active = false;
-        }
+//Toggle Active/Inactive Accounts on the {User List} found on the {Admin Page}.
+export const toggleUserAccountStatus = (user) => {//toggleUserAccountStatus
+    return function (dispatch) {//Dispatching to Redux Store
+        user.active = !user.active;//Toggle Boolean for User Active Status.
         return axios.put('https://localhost:44338/api/users/' + user.id, user).then((data) => {
-            dispatch(toggleUserAccountStatusToState(data))
-        })
-    }
-}
+            dispatch(toggleUserAccountStatusToState(data))//Dispatch using this method.
+        })//HTTP Put Requested and Then finished using the method.
+    }//Dispatched to Redux Store.
+}//toggleUserAccountStatus.
+
 //After Toggling the Account by Active/Inactive, then update the Redux Store.
 export const toggleUserAccountStatusToState = () => ({
     type: TOGGLE_USER_ACCOUNT_STATUS

@@ -8,17 +8,12 @@ import { Container } from "react-bootstrap";
 import Home from './pages/Home/Home';
 import Admin from './pages/Admin/Admin';
 
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './index.css';
 import './App.css';
 import Navbar from './pages/Layout/Navbar';
 
 class App extends Component {
-
-    constructor(props) {
-        super(props)
-    }
-
     render = () => {
         return (            
             <Container fluid>

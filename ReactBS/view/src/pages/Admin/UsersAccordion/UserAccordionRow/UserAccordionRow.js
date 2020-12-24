@@ -3,7 +3,7 @@ import React from "react";
 //Redux
 import { connect } from "react-redux";
 //Action Methods
-import { toggleUserAdminStatus, editUserEmail, toggleUserAccountStatus } from "../../redux/actions";
+import { toggleUserAdminStatus, editUserEmail, toggleUserAccountStatus } from "../../../../redux/actions";
 //React-BootStrap
 import { Button, ButtonGroup, FormControl, InputGroup, Popover, OverlayTrigger, Accordion, Card } from "react-bootstrap";
 

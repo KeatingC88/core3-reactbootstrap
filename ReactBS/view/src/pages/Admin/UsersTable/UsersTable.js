@@ -1,12 +1,8 @@
 ﻿import React, { Component } from "react";
-import UserTableRow from "./UserTableRow";
+import UserTableRow from "./UsersTableRow/UserTableRow";
 import {Table }from "react-bootstrap";
 
 class UsersTable extends Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         const users = this.props.users;
