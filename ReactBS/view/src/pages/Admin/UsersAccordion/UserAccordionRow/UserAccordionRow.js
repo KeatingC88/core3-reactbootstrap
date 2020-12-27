@@ -41,8 +41,12 @@ export const UserAccordionRow = ({ user, toggleUserAdminStatus, toggleUserAccoun
                         }>
                         <Button variant="outline-secondary">Edit</Button>
                     </OverlayTrigger>
-                    <Button variant="outline-secondary" onClick={() => toggleUserAdminStatus(user.id, user)}>Admin</Button>
-                    <Button variant="outline-secondary" onClick={() => toggleUserAccountStatus(user)}>{user && user.active ? "Disable" : "Enable"}</Button>
+                    <Button variant="outline-secondary" onClick={() => toggleUserAdminStatus(user.id, user)}>
+                        {user && user.admin ? "Revert to User Account" : "Make Admin Account"}
+                    </Button>
+                    <Button variant="outline-secondary" onClick={() => toggleUserAccountStatus(user)}>
+                        {user && user.active ? "Disable Account" : "Enable Account"}
+                    </Button>
                 </ButtonGroup>
             </Card.Body>
         </Accordion.Collapse>

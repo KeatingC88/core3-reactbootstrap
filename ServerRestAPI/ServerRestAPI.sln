@@ -5,7 +5,10 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerRestAPI", "ServerRestAPI\ServerRestAPI.csproj", "{4701299D-A172-49C3-B91F-C27AB1FBD06E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactBS", "..\ReactBS\ReactBS.csproj", "{585ED59C-1D76-4ABC-A223-EBCF6485F9A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReactBS", "..\ReactBS\ReactBS.csproj", "{585ED59C-1D76-4ABC-A223-EBCF6485F9A1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4701299D-A172-49C3-B91F-C27AB1FBD06E} = {4701299D-A172-49C3-B91F-C27AB1FBD06E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -25,9 +25,13 @@ class Admin extends Component {
             key: "home",//Default Tab that acts as a Cover-Page.
         }
     }
+    //How to make this auto fresh like shown in "Render()"
+    componentDidMount(){
+        //this.props.startUsersAPI();//This fetches the USER API consistently.
+    }
     
     render() {
-        this.props.startUsersAPI();//This fetches the USER API consistently and only applied on the Admin Page Currently.
+        this.props.startUsersAPI();//This fetches the USER API consistently.
         //Icon Elements
         const tableIcon = <FontAwesomeIcon icon={faTable} />;
         const accordionIcon = <FontAwesomeIcon icon={faCompressAlt} />;

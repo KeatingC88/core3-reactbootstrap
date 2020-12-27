@@ -55,10 +55,10 @@ const UserElement = ({ user, toggleUserAdminStatus, toggleUserAccountStatus }) =
                 </OverlayTrigger>
 
                 <Button variant="outline-secondary" onClick={() => toggleUserAdminStatus(user.id, user)}>
-                    {user && user.admin ? "Admin" : "User"}
+                    {user && user.admin ? "Revert to User Account" : "Make Admin Account"}
                 </Button>                
                 <Button variant="outline-secondary" onClick={() => toggleUserAccountStatus(user)}>
-                    {user && user.active ? "Disable" : "Enable"}
+                    {user && user.active ? "Disable Account" : "Enable Account"}
                 </Button>
             </ButtonGroup>
         </td>

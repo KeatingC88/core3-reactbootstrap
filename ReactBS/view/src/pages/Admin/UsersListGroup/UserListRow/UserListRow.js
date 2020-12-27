@@ -13,7 +13,7 @@ const updateInput = (_input) => {
     input = _input;
 }
 
-const UserListRow = ({ user, toggleUserAdminStatus, toggleUserAccountStatus }) => (
+export const UserListRow = ({ user, toggleUserAdminStatus, toggleUserAccountStatus }) => (
     <ListGroup.Item>
         {user.email}
         <ButtonGroup toggle size="sm" className="float-right">
@@ -33,8 +33,12 @@ const UserListRow = ({ user, toggleUserAdminStatus, toggleUserAccountStatus }) =
                 }>
                 <Button variant="outline-secondary">Edit</Button>
             </OverlayTrigger>
-            <Button variant="outline-secondary" onClick={() => toggleUserAdminStatus(user.id, user)}>Admin</Button>
-            <Button variant="outline-secondary" onClick={() => toggleUserAccountStatus(user)}>{user && user.active ? "Disable" : "Enable"}</Button>
+            <Button variant="outline-secondary" onClick={() => toggleUserAdminStatus(user.id, user)}>
+                {user && user.admin ? "Revert to User Account" : "Make Admin Account"}
+            </Button>
+            <Button variant="outline-secondary" onClick={() => toggleUserAccountStatus(user)}>
+                {user && user.active ? "Disable Account" : "Enable Account"}
+            </Button>
         </ButtonGroup>
     </ListGroup.Item>
 );
