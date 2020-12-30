@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using FluentValidation;
+
+
 namespace ServerRestAPI.Models
 {
     public class User
@@ -12,5 +15,14 @@ namespace ServerRestAPI.Models
         public bool Admin { get; set; }
         public bool Active { get; set; }
 
+    }
+
+    public class UserValidator : AbstractValidator<User> {
+        public UserValidator() {
+            RuleFor(x => x.Id).NotNull();
+            RuleFor(x => x.Email).NotNull().EmailAddress().MaximumLength(70);
+            RuleFor(x => x.Admin).NotNull();
+            RuleFor(x => x.Active).NotNull();
+        }
     }
 }

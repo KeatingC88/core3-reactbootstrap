@@ -13,10 +13,10 @@ let idCount = 0;
 export const addUser = (email) => {    
     return function (dispatch) {
         const userObject = {
-            id: ++idCount,
-            email: email,
-            admin: false,
-            active: true
+            id: ++idCount,//Assigning the ID from Client-side level.
+            email: email,//User must provide an email.
+            admin: false,//Default accounts are not admins.
+            active: true//Default enables the account to be active.
         }//userObject.
         return axios.post('https://localhost:44338/api/users/', userObject).then(({ data }) =>
         {

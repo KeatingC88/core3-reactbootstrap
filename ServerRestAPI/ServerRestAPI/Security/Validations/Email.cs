@@ -8,6 +8,7 @@ namespace ServerRestAPI.Security.Validations
     public class Email
     {
 
+        //Custom Server-Side Validations Here...
 
 
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -50,7 +51,7 @@ namespace ServerRestAPI.Controllers
             if (id != usersDTO.Id)
             {
                 return BadRequest();
-            }
+            } 
 
             var user = await _context.Users.FindAsync(id);
             if (user == null)
@@ -62,6 +63,15 @@ namespace ServerRestAPI.Controllers
             user.Email = usersDTO.Email;
             user.Admin = usersDTO.Admin;
             user.Active = usersDTO.Active;
+
+            var validator = new UserValidator();
+            var validationResult = validator.Validate(user);//This is basically checking for the email validation only.
+            validationResult.AddToModelState(ModelState, null);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }//If Email is invalid it will stop here...
 
             try
             {
@@ -86,9 +96,17 @@ namespace ServerRestAPI.Controllers
                 Email = usersDTO.Email,
                 Admin = usersDTO.Admin,
                 Active = usersDTO.Active,
-            };
+            };//User Object
 
-            _context.Users.Add(user);
+            var validator = new UserValidator();
+            var validationResult = validator.Validate(user);//This is basically checking for the email validation only.
+            validationResult.AddToModelState(ModelState, null);
+
+            if (! ModelState.IsValid) {
+                return BadRequest();
+            }
+            
+            _context.Users.Add(user);//When email is valid -- save it.
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, UserToDTO(user));

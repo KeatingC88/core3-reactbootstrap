@@ -1,7 +1,7 @@
 ﻿import React, { Component } from "react";
 
 class email extends Component {    
-
+    
     validation = (input) => {
         //console.log("validating email...");
         let inputArray = input.split("");//Split into Characters into array segments.
@@ -23,6 +23,7 @@ class email extends Component {
         //Numeric Return Counts
         let countLocalLetters = (localEmail.match(/[A-Za-z]/g) || []).length;//Count local address letters.
         let countDotsInLocalEmail = (localEmail.match(/[.]/g) || []).length;//Count local "."'s in the email adress.
+ 
         //Entire String maximum length
         if (countStringChars >= 70) {
             return false;
@@ -68,8 +69,7 @@ class email extends Component {
             console.log("Domain must contain maximum of 3 .'s");
             this.state.validated = false;
         }
-        */
-        //this.setState({ validated: false });        
+        */    
     }
 }
 
