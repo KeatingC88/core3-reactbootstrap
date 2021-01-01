@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
 
+using ServerRestAPI.Models;
+
 namespace ServerRestAPI.Models
 {
     public class UsersContext : DbContext

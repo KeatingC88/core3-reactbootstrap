@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <Folder Include="view\src\pages\CreateAccount\" />
-    <Folder Include="view\src\pages\LogOut\" />
-    <Folder Include="view\src\pages\LogIn\" />
     <Folder Include="view\src\pages\DeleteAccount\" />
     <Folder Include="view\src\pages\UserProfile\" />
   </ItemGroup>
