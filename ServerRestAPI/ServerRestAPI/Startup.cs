@@ -14,6 +14,7 @@ using FluentValidation.AspNetCore;
 
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.OpenApi.Models;
 
 namespace ServerRestAPI
 {
@@ -54,9 +55,37 @@ namespace ServerRestAPI
                 //Note: SwashBuckle relies on the method "services.ADDMVC()"'s existence to automatically detect endpoints for Swagger.UI. Alternatives to this approach is found on the note here:https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-5.0&tabs=visual-studio
             }).AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UserValidator>());
 
+            /*
             //Swagger Inject Part 2.
-            services.AddSwaggerGen();// Register the Swagger generator, defining 1 or more Swagger documents.
-
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "My API",
+                    Version = "v1"
+                });//SwaggerDoc
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please insert JWT with Bearer into field",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });//AddSecurityDefinition
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                    },
+                    new string[] { }
+                }
+                });//AddSecurityRequirement
+            });// Register the Swagger generator, defining 1 or more Swagger documents.
+            */
             //FluentValidation: UserValidator Inject.
             services.AddTransient<IValidator<User>, UserValidator>();
 
@@ -73,7 +102,15 @@ namespace ServerRestAPI
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
-            
+
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+
+            // In production, the React files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/build";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,14 +128,18 @@ namespace ServerRestAPI
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
 
-            app.UseSwagger();// Enable middleware to serve generated Swagger as a JSON endpoint.
+            //app.UseSwagger();// Enable middleware to serve generated Swagger as a JSON endpoint.
 
+            /*
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");//localhost:xxxx/swagger/v1/swagger.<html, js, css, json, etc...>
                 c.RoutePrefix = string.Empty; //To serve the Swagger UI at the app's root  localhost:xxxx
             });// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            */
 
             app.UseRouting();
             

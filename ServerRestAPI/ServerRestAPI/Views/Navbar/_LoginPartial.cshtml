@@ -12,24 +12,16 @@
     }
 }
 
-
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
-            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
+    <Nav.Link href="#" asp-area="Identity" asp-page="/Account/Manage/Index1">Hello @User.Identity.Name!</Nav.Link>
+    <Form inline asp-area="Identity" asp-page="/Account/Logout2" asp-route-returnUrl="/">
+        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+        <Button variant="outline-success" type="submit">Logout</Button>
+    </Form>
 }
 else
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="@returnUrl">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@returnUrl">Login</a>
-    </li>
+    <Nav.Link href="#" asp-area="Identity" asp-page="/Account/Register3" asp-route-returnUrl="@returnUrl">Register</Nav.Link>
+    <Nav.Link href="#" asp-area="Identity" asp-page="/Account/Login4" asp-route-returnUrl="@returnUrl">Login</Nav.Link>
 }

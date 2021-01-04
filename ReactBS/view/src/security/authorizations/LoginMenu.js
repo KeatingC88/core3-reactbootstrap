@@ -1,5 +1,6 @@
 ﻿import React, { Component, Fragment } from 'react';
 import { NavItem, NavLink } from 'reactstrap';
+import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
@@ -12,19 +13,30 @@ export class LoginMenu extends Component {
             isAuthenticated: false,
             userName: null
         };
+
+        console.log(this.props);
     }
 
     componentDidMount() {
         this._subscription = authService.subscribe(() => this.populateState());
         this.populateState();
+
+        console.log(this._subscription);
+        console.log(authService.subscribe());
     }
 
     componentWillUnmount() {
         authService.unsubscribe(this._subscription);
+
+        console.log(this._subscription);
     }
 
     async populateState() {
         const [isAuthenticated, user] = await Promise.all([authService.isAuthenticated(), authService.getUser()])
+
+        console.log(isAuthenticated);
+        console.log(user);
+
         this.setState({
             isAuthenticated,
             userName: user && user.name
@@ -33,6 +45,10 @@ export class LoginMenu extends Component {
 
     render() {
         const { isAuthenticated, userName } = this.state;
+
+        console.log(isAuthenticated);
+        //console.log(userName);
+
         if (!isAuthenticated) {
             const registerPath = `${ApplicationPaths.Register}`;
             const loginPath = `${ApplicationPaths.Login}`;
@@ -44,7 +60,13 @@ export class LoginMenu extends Component {
         }
     }
 
+    /*
     authenticatedView(userName, profilePath, logoutPath) {
+
+        console.log(userName);
+        console.log(profilePath);
+        console.log(logoutPath);
+
         return (<Fragment>
             <NavItem>
                 <NavLink tag={Link} className="text-dark" to={profilePath}>Hello {userName}</NavLink>
@@ -57,6 +79,8 @@ export class LoginMenu extends Component {
     }
 
     anonymousView(registerPath, loginPath) {
+        console.log(registerPath);
+        console.log(loginPath);
         return (<Fragment>
             <NavItem>
                 <NavLink tag={Link} className="text-dark" to={registerPath}>Register</NavLink>
@@ -66,4 +90,25 @@ export class LoginMenu extends Component {
             </NavItem>
         </Fragment>);
     }
+    */
+    
+         authenticatedView(userName, profilePath, logoutPath) {
+            return (
+                <Fragment>
+                    <Nav.Link tag={Link} className="text-dark" href={profilePath}>Hello {userName}</Nav.Link>
+                    <Nav.Link tag={Link} className="text-dark" href={logoutPath}>Logout</Nav.Link>
+                </Fragment>
+            );
+        }
+
+        anonymousView(registerPath, loginPath) {
+            return (
+                <Fragment>
+                    <Nav.Link tag={Link} className="text-dark" href={registerPath}>Register</Nav.Link>
+                    <Nav.Link tag={Link} className="text-dark" href={loginPath}>Login</Nav.Link>
+                </Fragment>
+            );
+        }
+     
+     
 }
