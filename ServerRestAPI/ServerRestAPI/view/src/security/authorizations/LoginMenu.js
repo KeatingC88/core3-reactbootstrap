@@ -1,6 +1,6 @@
 ﻿import React, { Component, Fragment } from 'react';
 //import { NavItem, NavLink } from 'reactstrap';
-import { Nav } from 'react-bootstrap';
+import { Nav, Button, ButtonGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
@@ -83,19 +83,23 @@ export class LoginMenu extends Component {
     
     authenticatedView(userName, profilePath, logoutPath) {
         return (
-                <>
-                <Nav.Link tag={Link} className="text-dark" href={profilePath}>Hello {userName}</Nav.Link>
-                <Nav.Link tag={Link} className="text-dark" href={logoutPath}>Logout</Nav.Link>
-                </>
+            <div>
+                <p className="m-0 p-0">Use your email and password.</p>
+                <Button tag={Link} className="text-white" href={profilePath}>Hello {userName}</Button>
+                <p className="m-0 p-0">Don't have an account?</p>
+                <Button tag={Link} className="text-white" href={logoutPath}>Logout</Button>
+            </div>
             );
         }
 
     anonymousView(registerPath, loginPath) {
-            return (
-                <Fragment>
-                    <Nav.Link tag={Link} className="text-dark" href={registerPath}>Register</Nav.Link>
-                    <Nav.Link tag={Link} className="text-dark" href={loginPath}>Login</Nav.Link>
-                </Fragment>
+        return (
+            <div>
+                <p className="m-0 p-0">Use your email and password.</p>
+                <Button tag={Link} className="text-white" href={loginPath}>Login Here</Button>
+                <p className="m-0 p-0">Don't have an account?</p>
+                <Button tag={Link} className="text-white" href={registerPath}>Register Here</Button>
+            </div>
             );
         }
      

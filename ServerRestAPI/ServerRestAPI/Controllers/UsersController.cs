@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace React_Bootstrap.Controllers
 {
-    //[Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -47,6 +47,7 @@ namespace React_Bootstrap.Controllers
         // PUT: api/Users/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(long id, UsersDTO usersDTO)
         {
@@ -89,6 +90,7 @@ namespace React_Bootstrap.Controllers
         // POST: api/Users
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<UsersDTO>> CreateUser(UsersDTO usersDTO)
         {
@@ -115,6 +117,7 @@ namespace React_Bootstrap.Controllers
         }
 
         // DELETE: api/Users/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(long id)
         {

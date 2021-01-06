@@ -26,15 +26,13 @@ export class AuthorizeService {
         await this.ensureUserManagerInitialized();
         const user = await this.userManager.getUser();
 
-        console.log("GU Log");
-        console.log("userobj:" + user);
-
         return user && user.profile;
     }
 
     async getAccessToken() {
         await this.ensureUserManagerInitialized();
         const user = await this.userManager.getUser();
+        console.log(user);
         return user && user.access_token;
     }
 
@@ -192,8 +190,6 @@ export class AuthorizeService {
         }
 
         let settings = await response.json();
-
-        console.log("hit2");
 
         settings.automaticSilentRenew = true;
         settings.includeIdTokenInSilentRenew = true;

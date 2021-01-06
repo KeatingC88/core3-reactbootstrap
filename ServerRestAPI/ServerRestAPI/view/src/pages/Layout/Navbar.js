@@ -1,6 +1,5 @@
 ﻿import React, { Component } from "react";
 import { Navbar, Nav } from 'react-bootstrap';
-import { LoginMenu } from '../../security/authorizations/LoginMenu';
 import { ApplicationName } from '../../constants';;
 
 
@@ -14,7 +13,7 @@ class NavBar extends Component {
                     <Nav className="mr-auto">
                         <Nav.Link href="/home">Home</Nav.Link>
                         <Nav.Link href="/admin">Admin</Nav.Link>
-                        <LoginMenu></LoginMenu>
+                        <Nav.Link href="/login">Login</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

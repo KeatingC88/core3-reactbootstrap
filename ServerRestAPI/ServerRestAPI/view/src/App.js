@@ -9,6 +9,7 @@ import { Container } from "react-bootstrap";
 //Web-App Pages
 import Home from './pages/Home/Home';
 import Admin from './pages/Admin/Admin';
+import LogIn from './pages/LogIn/LogIn';
 
 //import logo from './logo.svg';
 import './index.css';
@@ -29,7 +30,8 @@ class App extends Component {
                     <Route exact path="/" component={Home} />
                     <Route path="/Home" component={Home} />
                     <Route path="/Admin" component={Admin} />
-                    <AuthorizeRoute path="/Admin" component={Admin} />
+                    <Route path="/Login" component={LogIn} />
+                    <AuthorizeRoute path="/UserProfile" />
                     <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
                 </Router>
             </Container>
