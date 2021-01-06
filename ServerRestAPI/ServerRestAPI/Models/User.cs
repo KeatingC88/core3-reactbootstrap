@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 
 
-namespace ServerRestAPI.Models
+namespace React_Bootstrap.Models
 {
     public class User
     {

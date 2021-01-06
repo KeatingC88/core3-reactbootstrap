@@ -6,10 +6,10 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ServerRestAPI.Models;
+using React_Bootstrap.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace ServerRestAPI.Controllers
+namespace React_Bootstrap.Controllers
 {
     //[Authorize]
     [Route("api/[controller]")]

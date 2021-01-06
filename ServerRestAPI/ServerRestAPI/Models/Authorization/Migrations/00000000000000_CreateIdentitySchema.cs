@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace ServerRestAPI.Models.Authorization.Migrations
+namespace React_Bootstrap.Models.Authorization.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

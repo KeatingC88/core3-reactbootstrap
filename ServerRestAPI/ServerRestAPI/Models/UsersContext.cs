@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
 
-using ServerRestAPI.Models;
+using React_Bootstrap.Models;
 
-namespace ServerRestAPI.Models
+namespace React_Bootstrap.Models
 {
     public class UsersContext : DbContext
     {

@@ -6,8 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication;
 
-using ServerRestAPI.Models;
-using ServerRestAPI.Models.Authorization;
+using React_Bootstrap.Models;
+using React_Bootstrap.Models.Authorization;
 
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 
-namespace ServerRestAPI
+namespace React_Bootstrap
 {
     public class Startup
     {
@@ -33,8 +33,8 @@ namespace ServerRestAPI
         public void ConfigureServices(IServiceCollection services)
         {
             //Inmemory Database Context Inject.
-            services.AddDbContext<UsersContext>(opt =>
-                opt.UseInMemoryDatabase("UsersDB"));
+            services.AddDbContext<UsersContext>(options =>
+                options.UseInMemoryDatabase("UsersDB"));//Create UsersDB every load.
 
             //Allow CORS Policies Inject. (Currently ALL Open)
             services.AddCors(options =>
@@ -91,8 +91,7 @@ namespace ServerRestAPI
 
             //Application Authentications
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+               options.UseInMemoryDatabase(Configuration.GetConnectionString("DefaultConnection")));//Call from LaunchSettings.json   
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -109,8 +108,10 @@ namespace ServerRestAPI
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "ClientApp/build";
+                configuration.RootPath = "view/build";
             });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -142,11 +143,11 @@ namespace ServerRestAPI
             */
 
             app.UseRouting();
-            
+
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
-            
+
             app.UseCors(openOrigin);
 
             app.UseEndpoints(endpoints =>
@@ -159,13 +160,14 @@ namespace ServerRestAPI
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "../reactbs/view";
+                spa.Options.SourcePath = "view";
 
                 if (env.IsDevelopment())
                 {
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+
         }
     }
 }

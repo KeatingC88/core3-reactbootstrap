@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
-namespace ServerRestAPI.Controllers
+namespace React_Bootstrap.Controllers
 {
     public class OidcConfigurationController : Controller
     {

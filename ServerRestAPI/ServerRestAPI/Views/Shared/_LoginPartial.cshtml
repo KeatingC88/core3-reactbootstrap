@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using React_Bootstrap.Models.Authorization;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    string returnUrl = null;
+    var query = ViewContext.HttpContext.Request.Query;
+    if (query.ContainsKey("returnUrl"))
+    {
+        returnUrl = query["returnUrl"];
+    }
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <Nav.Link href="#" asp-area="Identity" asp-page="/Account/Manage/Index">Hello @User.Identity.Name!</Nav.Link>
+    <Form inline asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
+        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+        <Button variant="outline-success" type="submit">Logoutz</Button>
+    </Form>
+}
+else
+{
+    <Nav.Link href="/Account/Register" asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="@returnUrl">Register</Nav.Link>
+    <Nav.Link href="/Account/Login" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@returnUrl">Login</Nav.Link>
+}

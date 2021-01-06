@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Identity;
 
-namespace ServerRestAPI.Models.Authorization
+namespace React_Bootstrap.Models.Authorization
 {
     public class ApplicationUser : IdentityUser
     {

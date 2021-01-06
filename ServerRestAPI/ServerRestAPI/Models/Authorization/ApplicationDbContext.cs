@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 
-using ServerRestAPI.Models;
+using React_Bootstrap.Models;
 
-namespace ServerRestAPI.Models.Authorization
+namespace React_Bootstrap.Models.Authorization
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
