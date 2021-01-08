@@ -1,5 +1,6 @@
 ﻿import React from 'react'
 import { Component } from 'react';
+
 import authService from './AuthorizeService';
 import { AuthenticationResultStatus } from './AuthorizeService';
 import { LoginActions, QueryParameterNames, ApplicationPaths } from './ApiAuthorizationConstants';
@@ -8,7 +9,7 @@ import { LoginActions, QueryParameterNames, ApplicationPaths } from './ApiAuthor
 // This is the starting point for the login process. Any component that needs to authenticate
 // a user can simply perform a redirect to this component with a returnUrl query parameter and
 // let the component perform the login and return back to the return url.
-export class Login extends Component {
+export class LoginByEmail extends Component {
     constructor(props) {
         super(props);
 
@@ -21,18 +22,15 @@ export class Login extends Component {
         const action = this.props.action;
         switch (action) {
             case LoginActions.Login:
-                console.log(this.getReturnUrl());
                 this.login(this.getReturnUrl());
                 break;
             case LoginActions.LoginCallback:
-                console.log(this.processLoginCallback);
                 this.processLoginCallback();
                 break;
             case LoginActions.LoginFailed:
                 const params = new URLSearchParams(window.location.search);
                 const error = params.get(QueryParameterNames.Message);
                 this.setState({ message: error });
-                console.log(error);
                 break;
             case LoginActions.Profile:
                 this.redirectToProfile();

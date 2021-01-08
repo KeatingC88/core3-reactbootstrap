@@ -10,13 +10,13 @@ import axios from "axios";
 
 let idCount = 0;
 /*Add a User by Email to the User List on the Admin Page.*/
-export const addUser = (email) => {    
+export const addUser = (email, admin) => {
     return function (dispatch) {
         const userObject = {
             id: ++idCount,//Assigning the ID from Client-side level.
             email: email,//User must provide an email.
-            admin: false,//Default accounts are not admins.
-            active: true//Default enables the account to be active.
+            admin: admin,//User must provide an Admin Account Status.
+            active: true//By Default enables the account to be active.
         }//userObject.
         return axios.post('https://localhost:44338/api/users/', userObject).then(({ data }) =>
         {

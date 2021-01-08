@@ -13,15 +13,28 @@
 }
 
 @if (SignInManager.IsSignedIn(User))
-{
-    <Nav.Link href="#" asp-area="Identity" asp-page="/Account/Manage/Index">Hello @User.Identity.Name!</Nav.Link>
-    <Form inline asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
-        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-        <Button variant="outline-success" type="submit">Logoutz</Button>
-    </Form>
+{//Authorized View for the User's NavBar.
+    <Button.Group>
+        <Button variant="outline-success btn-sm" href="/Account/Manage/Index"
+                asp-area="Identity" asp-page="/Account/Manage/Index" asp-route-returnUrl="/Account/Manage/Index">
+            @User.Identity.Name's Settings
+        </Button>
+        <Button variant="outline-success btn-sm" href="/LogOut"
+                asp-area="Identity" asp-page="Identity/Account/Logout" asp-route-returnUrl="/LogOut">
+            Logout
+        </Button>
+    </Button.Group>
 }
-else
-{
-    <Nav.Link href="/Account/Register" asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="@returnUrl">Register</Nav.Link>
-    <Nav.Link href="/Account/Login" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@returnUrl">Login</Nav.Link>
+    else
+{//UnAuthenticated/Authorized View
+    <Button.Group>
+        <Button href="Identity/Account/Register"
+                asp-area="Identity" asp-page="Identity/Account/Register" asp-route-returnUrl="@returnUrl">
+            Register
+        </Button>
+        <Button href="Identity/Account/Login"
+                asp-area="Identity" asp-page="Identity/Account/Login" asp-route-returnUrl="Identity/Account/Manage/Index">
+            Login
+        </Button>
+    </Button.Group>
 }

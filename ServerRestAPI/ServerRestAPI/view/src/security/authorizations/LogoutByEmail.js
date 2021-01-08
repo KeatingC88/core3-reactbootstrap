@@ -7,7 +7,7 @@ import { QueryParameterNames, LogoutActions, ApplicationPaths } from '../../secu
 // The main responsibility of this component is to handle the user's logout process.
 // This is the starting point for the logout process, which is usually initiated when a
 // user clicks on the logout button on the LoginMenu component.
-export class Logout extends Component {
+export class LogoutByEmail extends Component {
     constructor(props) {
         super(props);
 
@@ -22,12 +22,15 @@ export class Logout extends Component {
         const action = this.props.action;
         switch (action) {
             case LogoutActions.Logout:
+                /*
                 if (!!window.history.state.state.local) {
                     this.logout(this.getReturnUrl());
                 } else {
                     // This prevents regular links to <app>/authentication/logout from triggering a logout
                     this.setState({ isReady: true, message: "The logout was not initiated from within the page." });
                 }
+                */
+                this.logout(this.getReturnUrl());
                 break;
             case LogoutActions.LogoutCallback:
                 this.processLogoutCallback();
