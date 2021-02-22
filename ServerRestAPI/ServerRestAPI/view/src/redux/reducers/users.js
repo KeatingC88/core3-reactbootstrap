@@ -1,8 +1,7 @@
-﻿
-import {
+﻿import {
 
     ADD_USER,
-    FETCH_USERAPI
+    FETCH_USER_DATA_FROM_USERS_API
 
 } from "../actionTypes";
 
@@ -28,7 +27,7 @@ export default function (state = initialState, action) {
                 }
             }
         }
-        case FETCH_USERAPI: {
+        case FETCH_USER_DATA_FROM_USERS_API: {
             let ids = [];
             let data = [];
             for (let i = 0; i <= action.payload.length - 1; i++) {

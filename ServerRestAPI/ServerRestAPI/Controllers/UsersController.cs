@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace React_Bootstrap.Controllers
 {
-    
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -104,7 +103,7 @@ namespace React_Bootstrap.Controllers
             };//User Object
 
             var validator = new UserValidator();
-            var validationResult = validator.Validate(user);//This is basically checking for the email validation only.
+            var validationResult = validator.Validate(user);
             validationResult.AddToModelState(ModelState, null);
 
             if (! ModelState.IsValid) {

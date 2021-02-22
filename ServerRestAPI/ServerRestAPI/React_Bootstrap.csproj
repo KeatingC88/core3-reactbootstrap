@@ -32,7 +32,6 @@
   <ItemGroup>
     <Folder Include="view\src\pages\CreateAccount\" />
     <Folder Include="view\src\pages\DeleteAccount\" />
-    <Folder Include="view\src\pages\UserProfile\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://json.schemastore.org/bootstraprc" /></VisualStudio></ProjectExtensions>

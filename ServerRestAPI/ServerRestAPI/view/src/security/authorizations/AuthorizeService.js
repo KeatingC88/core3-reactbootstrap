@@ -4,6 +4,7 @@ import { ApplicationName } from '../../constants';
 
 
 export class AuthorizeService {
+
     _callbacks = [];
     _nextSubscriptionId = 0;
     _user = null;
@@ -32,7 +33,7 @@ export class AuthorizeService {
     async getAccessToken() {
         await this.ensureUserManagerInitialized();
         const user = await this.userManager.getUser();
-        console.log(user);
+        //console.log(user);
         return user && user.access_token;
     }
 

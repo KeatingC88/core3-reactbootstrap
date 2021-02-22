@@ -32,10 +32,6 @@ class Admin extends Component {
             key: "home",//Default Tab that acts as a Cover-Page.
         }
     }
-    //How to make this auto fresh like shown in "Render()"
-    componentDidMount(){
-        //this.props.startUsersAPI();//This fetches the USER API consistently.
-    }
     
     render() {
         this.props.startUsersAPI();//This fetches the USER API consistently.
