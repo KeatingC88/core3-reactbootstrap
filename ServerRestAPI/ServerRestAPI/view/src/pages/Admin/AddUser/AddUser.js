@@ -1,13 +1,13 @@
-﻿//App Core
-import React, { Component } from "react";
-//State Management Connection
-import { connect } from "react-redux";
-//Page Structure
-import { Form, Button } from "react-bootstrap";
-//Page Security
-import email from "../../../security/validations/email";
-//Page Action
-import { addUser } from "../../../redux/actions";
+﻿//Import ReactJS System.
+import React, { Component } from "react";//ReactJS.
+//Storage State Management Connection from Redux System.
+import { connect } from "react-redux";//Redux.
+//Import BootStrap System.
+import { Form, Button } from "react-bootstrap";//Bootstrap.
+//Import Validation System.
+import email from "../../../security/validations/email";//Validation for Emails.
+//Import Action Methods from Redux Storage System.
+import { addUser } from "../../../redux/actions";//Adds User to the Admin's User List.
 
 class AddUser extends Component {
 
@@ -18,7 +18,7 @@ class AddUser extends Component {
             adminAccount: false,
             validated: false
         }
-        this.updateCheck = this.updateCheck.bind(this);
+        this.updateCheckBoxStatus = this.updateCheckBoxStatus.bind(this);
     }    
     //Check Email Validation Before Submitting to the Database.
     handleSubmit = () => {
@@ -34,11 +34,11 @@ class AddUser extends Component {
     /*Add the User to the UsersDB via Action POST to the API*/
     submit = () => {
         this.props.addUser(this.state.input, this.state.adminAccount);//Submit to the database using Action Method in /Redux/Actions.js.
-    }//Submit
-    /*Update the Check State based on User Keydown Events*/
-    updateCheck = (e) => {
+    }//End of Submit Process.
+    /*Update the CheckBox State Input based on User Keydown Events*/
+    updateCheckBoxStatus = (e) => {
         this.setState({ adminAccount: e.target.checked });
-    }//updateCheck
+    }//End updateCheckBoxStatus State.
     /*Update the Input State based on User Keydown Events*/
     updateInput = (input) => {
         this.setState({ input })//Update component state for User's Input.        
@@ -48,20 +48,20 @@ class AddUser extends Component {
     }//UpdateInput
 
     render() {
-        return (
+        return (//Set the Form to Straight-Inline Style.
             <Form inline>
                 <Form.Row>
                     <Form.Group className="m-0" controlId="emailAddress">
                         <Form.Label>Add User By Email Address:&nbsp;&nbsp;</Form.Label>
-                            <Form.Control
-                                placeholder="Enter a New Email"
-                                aria-label="User Email"
-                                aria-describedby="Adding a User Email"
-                                onChange={e => this.updateInput(e.target.value)}
-                                value={this.state.input}
-                                type="email"
-                                required
-                                size="sm"
+                            <Form.Control//ReactJS-BootStrap Element in JSX
+                                placeholder="Enter a New Email"//HTML Bootstrap Element Attribute
+                                aria-label="User Email"//HTML Bootstrap Element Attribute
+                                aria-describedby="Adding a User Email"//HTML Bootstrap Element Attribute
+                                onChange={e => this.updateInput(e.target.value)}//HTML Bootstrap JSX Element Attribute
+                                value={this.state.input}//HTML Element Attribute
+                                type="email"//HTML Element Attribute
+                                required//HTML Element Attribute
+                                size="sm"//HTML Bootstrap Element Attribute
                             />
                         <Form.Control.Feedback>Added!</Form.Control.Feedback>
                         <Form.Control.Feedback type="invalid">Must Enter a Valid Email</Form.Control.Feedback>
@@ -71,11 +71,11 @@ class AddUser extends Component {
                     </Form.Group>   
                     <Form.Group controlId="adminAccountCheckBox">
                         <Form.Label>&nbsp;&nbsp;<b>Admin Account?&nbsp;</b></Form.Label>
-                        <Form.Check
-                            type="checkbox"
-                            className="mt-1"
-                            checked={this.state.adminAccount}
-                            onChange={this.updateCheck}
+                        <Form.Check//ReactJS-BootStrap Element
+                            type="checkbox"//HTML Element Attribute
+                            className="mt-1"//HTML Element Attribute
+                            checked={this.state.adminAccount}//HTML Element Attribute
+                            onChange={this.updateCheckBoxStatus}//JSX Element Attribute
                         />
                     </Form.Group>                 
                 </Form.Row>                

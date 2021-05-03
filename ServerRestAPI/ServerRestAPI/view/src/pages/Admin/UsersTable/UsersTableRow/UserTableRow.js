@@ -7,17 +7,14 @@ import { Button, ButtonGroup, FormControl, InputGroup, Popover, OverlayTrigger }
 let input = "";
 
 const handleSubmit = (id, user) => {
-    //console.log(id, user, input);
-    editUserEmail(id, user, input)
-    //Close PopUp...
-
+    //Close PopUp...    
 }
 
 const updateInput = (_input) => {
     input = _input;
 }
 
-const UserElement = ({ user, toggleUserAdminStatus, toggleUserAccountStatus }) => (
+const UserElement = ({ user, toggleUserAdminStatus, toggleUserAccountStatus, editUserEmail }) => (
     <tr>
         <td>
             {user.id}
@@ -31,11 +28,11 @@ const UserElement = ({ user, toggleUserAdminStatus, toggleUserAccountStatus }) =
         <td 
             className={cx(
                 "user-account",
-                user && user.adminUser && "admin-account"
-            )}
+                user && user.adminUser && "admin-account",
+                "text-center")}
         >
             {user.email}
-            <ButtonGroup toggle size="sm" className="float-right">
+            <ButtonGroup toggle size="sm" className="float-center">
 
                 <OverlayTrigger rootClose={true} trigger="click" placement="left" overlay=
                     {
@@ -45,7 +42,9 @@ const UserElement = ({ user, toggleUserAdminStatus, toggleUserAccountStatus }) =
                             <InputGroup>
                                 <FormControl placeholder={user.email} onChange={e => updateInput(e.target.value)}/>
                                 <InputGroup.Append>
-                                    <Button variant="outline-secondary" onClick={() => handleSubmit(user.id, user)}>Save Email</Button>
+                                    <Button variant="outline-secondary" onClick={() => {
+                                        editUserEmail(user.id,user,input);
+                                    }}>Save Email</Button>
                                 </InputGroup.Append>
                             </InputGroup>
                         </Popover.Content>

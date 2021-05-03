@@ -1,6 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
+//Importing ReactJS Framework and React Router Document Object Model.
+import React from 'react';//ReactJS
+import ReactDOM from 'react-dom';//React Router Dom.
+//Importing Redux.
 import { Provider } from 'react-redux';
 import store from './redux/store';
 

@@ -1,4 +1,8 @@
-﻿import { UPDATE_USER_AUTHENTICATION_STATUS } from "../actionTypes";
+﻿import {
+
+    UPDATE_USER_AUTHENTICATION_STATUS,
+
+} from "../actionTypes";
 
 const initialState = {
     userData: {},
