@@ -32,12 +32,13 @@ export const addUser = (email, admin) => {
             },
         })
         .then((response) => {
-            //console.log('response', response.data)
+            console.log('response', response.data)
+            //Record The Email that added the User Account and Description Why.
+            //Record who submitted and the email that was entered with the date/time of the local and server.
         })
         .catch((error) => {
             alert('error', error.response)
             //dispatch(userUpdateProfileFail())
-
         })
         //console.log('response: ', data)
         //dispatch(userUpdateProfileSuccess(data))

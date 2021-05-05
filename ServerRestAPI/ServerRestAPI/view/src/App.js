@@ -111,7 +111,7 @@ class App extends Component {
 
                 <Router>
                     <Route exact path="/" component={Home} />
-                    <Route path="/Home" component={Home} />                    
+                    <Route path="/Home" component={Home} />
                     <Route path="/Login" component={LogIn} />
 
                     <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />

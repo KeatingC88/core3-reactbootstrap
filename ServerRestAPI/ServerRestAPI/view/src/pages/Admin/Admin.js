@@ -46,14 +46,14 @@ class Admin extends Component {//Extend ReactJS Component Class
                 <Col>
                     <Jumbotron fluid>
                         <Container>
-                            <h1>Admin Panel</h1>
+                            <h1 className="text-center"><b><u>Administrator Control Panel</u></b></h1>
                         </Container>
                     </Jumbotron>
-                    <Card className="w-50 mx-auto mt-5">
+                    <Card className="w-50 mx-auto mt-5" id="admin-useraccountdb-card">
                         <Card.Body>
                             <Row>
                                 <Col>
-                                    <h4>{eyeIcon} Data-Viewing Options {databaseIcon}</h4>
+                                    <h4 className="text-center">{eyeIcon} Data-Viewing Options for the User Accounts Database {databaseIcon}</h4>
                                     <Tabs activeKey={this.state.key} onSelect={(key) => this.setState({ key })}>
                                         <Tab eventKey="home">
                                             <h1 className="text-center">User List {infoIcon}nformation</h1>
