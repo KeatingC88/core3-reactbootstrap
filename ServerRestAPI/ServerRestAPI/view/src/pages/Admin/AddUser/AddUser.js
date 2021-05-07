@@ -11,7 +11,13 @@ import { addUser } from "../../../redux/actions";//Adds User to the Admin's User
 //Define Add User Component for the Admin Page to add emails to the User List.
 class AddUser extends Component {//This component adds user to the User List/Database using a Web API.
     //Class Properties List.
-    email = new email();//Check if User has input a full email address...
+    email = new email();//Email Tester Class that returns an Object of 3 properties.
+    /**
+     *  new Email()'s 3 properties listed below:
+        1) result(of the test as boolean), 
+        2) msg(feedback of the test as string), 
+        3) color for ReactJS - Bootstrap Alert component(feedback of the test as string).
+     */
     //Constructor.
     constructor(props) {//Args from the parent component.
         super(props)//Superset the Props passed by parent component.
@@ -22,40 +28,38 @@ class AddUser extends Component {//This component adds user to the User List/Dat
             currentUsersEmail: "",//Default is empty, but updated on Adding an Email Submission of the person adding that email.
             countNumberOfOverallSubmitAttempts: 0,//Starts at 0, but updated everytime the User adds an email to keep track of over-posting/spam from a client level.
             submitAttemptIsOnHold: false,//Default to enable an Admin to add a User at this time, then this changes periodically after the first submission.
-            emailValidationMsg: "",
-            disabled: false,
-            variantColorString: "",
+            emailValidationMsg: "",//Default for Email Tester's Response Message.
+            disabled: false,//Default for GUI controls when disabling the Add Button when the User recently submitted -- ideally to help avoid over-posting and spam on the AddUser Component.
+            variantColorString: "",//Default for GUI Alert and Feedback to the User from this AddUser Component.
         }//End of Class State.
         this.updateCheckBoxStatus = this.updateCheckBoxStatus.bind(this);//Binding for the Form Checkbox Boolean Value.
     }//End of Constructor for AddUser Component Class.
-    //AddUser Methods...
-    //Check Form Validation(s) Before Submitting to the Database through the API at Client Side Level.
-    handleSubmit = () => {//When Submit button is pressed...
 
-        this.state.countNumberOfOverallSubmitAttempts += 1;
-        let emailTest = this.email.validation(this.state.input);//Updating Class Properties with Email Test Result Bool Type.
-        this.state.inputValid = emailTest.result;//returns boolean and attaching it to the state of this component.
+    //Check Form Validation(s) Before Submitting to the Database through the WebAPI provided for this Client Side App.
+    handleSubmit = () => {//When Submit/Add button is pressed...
+        this.state.countNumberOfOverallSubmitAttempts += 1;//Increment the number of times the Add Button was hit to keep track of spam on the GUI...
+        let emailTest = this.email.validation(this.state.input);//Set the Response Object from Email Test to a Variable in this Method...
+        this.state.inputValid = emailTest.result;//Set Class State Variable with the boolean result from the Email Tester Class.
 
-        //Check if Email is Valid with our System's Input Checks, Existance in Database, System's Blacklist, and etc.
-        if (!this.state.inputValid) {
-            this.state.emailValidationMsg = emailTest.msg;//Get the Error Message from the Email Object.
-            this.setState({ emailValidationMsg: emailTest.msg, variantColorString: "warning" });//Set the Error Message that was given.
+        //Check User Input if the Email is Valid with our System's Input Checks, Existance in Database, System's Blacklist, and etc.
+        if (!this.state.inputValid) {//IF Email Address Is Invalid...
+            this.state.emailValidationMsg = emailTest.msg;//Get the Error Message from the Email Response Object...
+            this.setState({ emailValidationMsg: emailTest.msg, variantColorString: emailTest.color });//Set the Error Message with appropriate response color...
         } else if (!this.props.authenticated) {//If the user somehow lost their authorization token in their browser, then prevent the add user process from happening.
             this.setState({ emailValidationMsg: "User no longer has authorization to Add a User.", variantColorString: "danger" });//Set the Error Message that was given.
-            //Record Invalidation/Tampered User's Email.
-        } else if (this.state.countNumberOfOverallSubmitAttempts >= 5) {
-            this.setState({ emailValidationMsg: "User has attempted spam Emails -- slow down.", variantColorString: "warning" });//Set the Error Message that was given.
-            setTimeout(() => {
-                console.log("spam released.");
-                this.state.countNumberOfOverallSubmitAttempts = 0;
-            }, 10000);
-        } else if (this.state.submitAttemptIsOnHold) {
+            //Possibly add-on: Record Invalidation/Tampered User's Email to help catch invokers/intiator/debugging reasons/etc.
+        } else if (this.state.countNumberOfOverallSubmitAttempts >= 5) {//This is a heavy warning when a user rapidly hits the AddUser Button.
+            this.setState({ emailValidationMsg: "User has attempted input spam -- slow down.", variantColorString: "warning" });//Set the Error Message that was given.
+            setTimeout(() => {//This resets the number of attempts a user clicked the submit/add button.
+                this.state.countNumberOfOverallSubmitAttempts = 0;//Reset this back to zero so we can keep track if there's more spammage.
+            }, 20000);//20 seconds time out for the user.
+        } else if (this.state.submitAttemptIsOnHold) {//This is what the user would see when adding too fast into AddUser Input box, as a light warning oppose to longer time outs.
             this.setState({ emailValidationMsg: "User is unable to Add at this time.", variantColorString:"warning" });//Set the Error Message that was given.
-        } else {
-            this.state.disabledBtn = true;
-            this.setState({ emailValidationMsg: emailTest.msg, variantColorString: "success" });
+        } else {//Email Input passed the Validation Process and the User is currently authorized, at this point in code.
+            this.state.disabled = true;//The button gets disabled to help prevent over-posting and spam.
+            this.setState({ emailValidationMsg: emailTest.msg, variantColorString: emailTest.color });//Update the Class Component of (this) AddUser.
             this.submit();//If valid email address, submit to the database.
-            this.setState({ input: "", adminAccount: false, inputValid: false, variantColorString: "success" });//Reset the Page State to Default Setting.
+            this.setState({ input: "", adminAccount: false, inputValid: false, variantColorString: emailTest.color });//Reset the Page State to Default Setting.
         }//End If...
 
         if (!this.state.submitAttemptIsOnHold) {
@@ -63,20 +67,17 @@ class AddUser extends Component {//This component adds user to the User List/Dat
             setTimeout(() => {
                 this.state.submitAttemptIsOnHold = false;
                 this.state.disabledBtn = false;
-                this.setState({ disabledBtn: false });
-                console.log("hold released.");
+                this.setState({ disabled: false, inputValid: false, variantColorString: "", input: "", emailValidationMsg: "" });
             }, 5000);
         }
-
-        console.log(this.state.variantColorString);
     }//End Handled Submit.
     /*Add the User to the UsersDB via Action POST to the API*/
     submit = () => {        
         this.props.addUser(this.state.input, this.state.adminAccount);//Submit to the database using Action Method in /Redux/Actions.js.
     }//End of Submit Process.
     /*Update the CheckBox State Input based on User Keydown Events*/
-    updateCheckBoxStatus = (e) => {
-        this.setState({ adminAccount: e.target.checked });
+    updateCheckBoxStatus = (e) => {//This will update everytime the User makes a change to the checkbox.
+        this.setState({ adminAccount: e.target.checked });//Update component state for User's Checkbox.
     }//End updateCheckBoxStatus State.
     /*Update the Input State based on User Keydown Events*/
     updateInput = (input) => {
@@ -88,7 +89,6 @@ class AddUser extends Component {//This component adds user to the User List/Dat
         return (//Set the Form to Straight-Inline Style.
             <Form inline validated={this.inputValid}>
                 <Form.Row>
-                    
                         <Form.Group className="m-0" controlId="emailAddress">
                             <Form.Label>Add User By Email Address:&nbsp;&nbsp;</Form.Label>
                             <Form.Control//ReactJS-BootStrap Element in JSX
@@ -117,13 +117,12 @@ class AddUser extends Component {//This component adds user to the User List/Dat
                                 checked={this.state.adminAccount}//HTML Element Attribute
                                 onChange={this.updateCheckBoxStatus}//JSX Element Attribute
                             />
-                        </Form.Group>
-                        <br />
-                        <Form.Label>
-                            <Alert variant={this.state.variantColorString}>
-                                {this.state.emailValidationMsg}
-                            </Alert>                            
-                        </Form.Label>                    
+                            <Form.Label>
+                                <Alert variant={this.state.variantColorString}>
+                                    {this.state.emailValidationMsg}
+                                </Alert>
+                            </Form.Label>
+                        </Form.Group>                        
                 </Form.Row>                
             </Form>
         )

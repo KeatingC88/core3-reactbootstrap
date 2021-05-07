@@ -49,7 +49,7 @@ class Admin extends Component {//Extend ReactJS Component Class
                             <h1 className="text-center"><b><u>Administrator Control Panel</u></b></h1>
                         </Container>
                     </Jumbotron>
-                    <Card className="w-50 mx-auto mt-5" id="admin-useraccountdb-card">
+                    <Card className="w-50 mx-auto mt-5 mb-5" id="admin-useraccountdb-card">
                         <Card.Body>
                             <Row>
                                 <Col>
